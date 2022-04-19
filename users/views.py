@@ -7,15 +7,9 @@ from .forms import Agregarmascota, RegistroMascota, UserRegisterForm, UserUpdate
 from django.http import HttpResponseRedirect
 
 def registromascota(request):
-    context = {}
-
-    registro = Agregarmascota(request.POST or None, request.FILES or None)
-
-    if registro.is_valid():
-        registro.save()
-    
-    context['registro'] = registro
-    return render(request, 'users/registromascota.html', context)
+    registro = Agregarmascota.objects.all()
+    contexto = {'registro': registro }
+    return render(request, 'blog/home.html', contexto)
 
 def register(request):
     if request.method == 'POST':
