@@ -3,13 +3,40 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from matplotlib.style import context
-from .forms import Agregarmascota, RegistroMascota, UserRegisterForm, UserUpdateForm, ProfileUpdateForm
-from django.http import HttpResponseRedirect
+from .forms import Agregarmascota,  UserRegisterForm, UserUpdateForm, ProfileUpdateForm, SolicitudAdopcion
+from .models import RegistroMascota
+
+def catalogo(request):
+    lista_catalogo = RegistroMascota.objects.all()
+    return render(request,'users/Catalogo.html', {'lista_catalogo': lista_catalogo })
+
 
 def registromascota(request):
-    registro = Agregarmascota.objects.all()
-    contexto = {'registro': registro }
-    return render(request, 'blog/home.html', contexto)
+
+    if request.method == 'POST':
+        registro = Agregarmascota(request.POST, request.FILES)
+        if registro.is_valid(): 
+            registro.save()
+            return redirect('catalogo')
+    else:
+        registro = Agregarmascota()
+    return render(request, 'users/registromascota.html', {'registro':registro})
+
+
+def solicitud(request):
+
+    if request.method == 'POST':
+        lista_solicitudes = SolicitudAdopcion(request.POST, request)
+        if lista_solicitudes.is_valid():
+            lista_solicitudes.save()
+            return redirect('catalogo')
+    else:
+        registro = Agregarmascota()
+    return render(request, 'users/formulario.html', {'registro':registro})
+
+
+
+
 
 def register(request):
     if request.method == 'POST':

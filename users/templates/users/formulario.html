@@ -1,0 +1,23 @@
+{% extends "blog/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<html>
+<title>Formulario de adopción</title>
+<body> 
+    <h1> Formulario de solicitud de adopción </h1>
+
+    <form action="/formulario/" method="POST">{% csrf_token %}
+        <p>Nombre: <input type="text" name="Nombre"> </p>
+        <p>Apellidos: <input type="text" name="Apellidos"> </p>
+        <p>Edad: <input type="text" name="Edad"> </p>
+        <p>Correo electronico: <input type="text" name="Correo"> </p>
+        <p>Telefono: <input type="text" name="Telefono"> </p>
+        <p>Domicilio: <textarea rows="1" cols="60" name="Domicilio"></textarea> </p>
+        <p>Numero de mascotas: <input type="integer" name="NumeroMasc"> </p>
+        <p>Razones para adoptar: <br><textarea rows="15" cols="45" name="Razones"></textarea></p>
+        
+        <input type="submit" value ="Enviar">
+    </form>
+</body>
+</html>
+{% endblock content %}
