@@ -3,17 +3,23 @@
 <h1>Catalogo</h1>  
 
 {% for RegistroMascota in lista_catalogo %}
+    {% if RegistroMascota.adoptante == 'Disponible' %}
+        <div>        <img class="rounded-circle account-img" src="{{RegistroMascota.imagen.url}}" >
+        <ul>
+        <h2><li> {{RegistroMascota.nombre}}</li> </h2>
+        <li> ID: {{RegistroMascota.id}}</li>
+        <li> Tipo de comida: {{RegistroMascota.alimentacion}}</li>
+        <li> Edad: {{RegistroMascota.edad}}</li>
+        <li> Fecha de rescate: {{RegistroMascota.fecha_de_rescate|date:"d F Y P "}}</li>
+        <li> Raza: {{RegistroMascota.raza}}</li>
+        <li> Enfermedades: {{RegistroMascota.enfermedades}}</li>
+        </ul>
+    </div>
 
-<img class="rounded-circle account-img" src="{{RegistroMascota.imagen.url}}" >
-<ul>
-<h2><li> {{RegistroMascota.nombre}}</li> </h2>
-<li> ID: {{RegistroMascota.id}}</li>
-<li> Tipo de comida: {{RegistroMascota.alimentacion}}</li>
-<li> Edad: {{RegistroMascota.edad}}</li>
-<li> Fecha de rescate: {{RegistroMascota.fecha_de_rescate|date:"d F Y P "}}</li>
-<li> Raza: {{RegistroMascota.raza}}</li>
-<li> Enfermedades: {{RegistroMascota.enfermedades}}</li>
-</ul>
-
+    {% else %}
+    <div>
+        <br><h3>A este lomito ya lo adoptaron!</h3>
+    </div>
+    {% endif %}
 {% endfor %}
 {% endblock content %}

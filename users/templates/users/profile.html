@@ -31,5 +31,28 @@
       </a>
     </button>
 {% endif %}
+<div class="content-section">
+  <div class="media">
+    <h2>Mascotas en proceso de adopcion</h2>
+{% for RegistroMascota in lista_catalogo %}
+{% if RegistroMascota.adoptante == user.username %}
+
+    <img class="rounded-circle account-img" src="{{RegistroMascota.imagen.url}}" >
+    <h2> {{RegistroMascota.nombre}}</h2>
+    <div class="media-body">
+      <ul>
+    <li> ID: {{RegistroMascota.id}}</li>
+    <li> Tipo de comida: {{RegistroMascota.alimentacion}}</li>
+    <li> Edad: {{RegistroMascota.edad}}</li>
+    <li> Fecha de rescate: {{RegistroMascota.fecha_de_rescate|date:"d F Y P "}}</li>
+    <li> Raza: {{RegistroMascota.raza}}</li>
+    <li> Enfermedades: {{RegistroMascota.enfermedades}}</li>
+    </ul>
   </div>
+</div>
+
+  {% endif %}
+{% endfor %}
+
+
 {% endblock content %}

@@ -10,7 +10,7 @@ from django.utils import timezone
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     image = models.ImageField(default='default.jpg', upload_to='profile_pics')
-
+    name  = models.CharField(max_length= 50)
     def __str__(self):
         return f'{self.user.username} Profile'
 
@@ -25,6 +25,7 @@ class Profile(models.Model):
             img.thumbnail(output_size)
             img.save(self.image.path)
 
+
 class RegistroMascota (models.Model):
     imagen           = models.ImageField(default='default.jpg', upload_to='fotos_mascotas')
     alimentacion     = models.CharField(max_length= 50)
@@ -34,12 +35,13 @@ class RegistroMascota (models.Model):
     raza             = models.CharField(max_length= 50)
     enfermedades     = models.CharField(max_length= 50)
     nombre           = models.CharField(max_length= 50)
+    adoptante        = models.CharField(default='Disponible', max_length= 50)
 
     def __str__(self):
         return self.nombre
     
     def save(self, *args, **kwargs):
-        super(Profile, self).save(*args, **kwargs)
+        super(RegistroMascota, self).save(*args, **kwargs)
 
         img = Image.open(self.imagen.path)
         if (img.height > 300  or img.width >300):
@@ -50,7 +52,6 @@ class RegistroMascota (models.Model):
 
 class SolicitudAdop (models.Model):
     Nombre     = models.CharField(max_length=50)
-    Apellidos  = models.CharField(max_length=50)
     Edad       = models.CharField(max_length=50)
     Correo     = models.EmailField()
     Telefono   = models.CharField(max_length=8)

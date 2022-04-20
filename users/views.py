@@ -4,7 +4,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from matplotlib.style import context
 from .forms import Agregarmascota,  UserRegisterForm, UserUpdateForm, ProfileUpdateForm, SolicitudAdopcion
-from .models import RegistroMascota
+from .models import RegistroMascota, Profile
 
 def catalogo(request):
     lista_catalogo = RegistroMascota.objects.all()
@@ -53,6 +53,8 @@ def register(request):
 
 @login_required  
 def profile(request):
+    lista_catalogo = RegistroMascota.objects.all()
+    lista_nombres = Profile.objects.all()
     if request.method == 'POST':
         u_form = UserUpdateForm(request.POST, instance=request.user)
         p_form = ProfileUpdateForm(request.POST, request.FILES,  instance=request.user.profile)
@@ -68,7 +70,9 @@ def profile(request):
 
     context = {
         'u_form':u_form,
-        'p_form':p_form
+        'p_form':p_form,
+        'lista_catalogo': lista_catalogo, 
+        'lista_nombres': lista_nombres
     }
 
 
