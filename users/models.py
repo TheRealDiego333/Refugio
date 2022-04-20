@@ -26,14 +26,14 @@ class Profile(models.Model):
             img.save(self.image.path)
 
 class RegistroMascota (models.Model):
-    imagen = models.ImageField(default='default.jpg', upload_to='fotos_mascotas')
+    imagen           = models.ImageField(default='default.jpg', upload_to='fotos_mascotas')
     alimentacion     = models.CharField(max_length= 50)
     vacunacion       = models.CharField(max_length= 100)
     edad             = models.CharField(max_length= 30)
     fecha_de_rescate = models.DateTimeField(default=timezone.now)
     raza             = models.CharField(max_length= 50)
     enfermedades     = models.CharField(max_length= 50)
-    nombre    = models.CharField(max_length= 50)
+    nombre           = models.CharField(max_length= 50)
 
     def __str__(self):
         return self.nombre
