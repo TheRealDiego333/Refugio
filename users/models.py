@@ -15,8 +15,8 @@ class Profile(models.Model):
         return f'{self.user.username} Profile'
 
 
-    def save(self):
-        super().save()
+    def save(self, *args, **kwargs):
+        super(Profile, self).save(*args, **kwargs)
 
         img = Image.open(self.image.path)
 
@@ -38,8 +38,8 @@ class RegistroMascota (models.Model):
     def __str__(self):
         return self.nombre
     
-    def save(self):
-        super().save()
+    def save(self, *args, **kwargs):
+        super(Profile, self).save(*args, **kwargs)
 
         img = Image.open(self.imagen.path)
         if (img.height > 300  or img.width >300):
@@ -60,6 +60,6 @@ class SolicitudAdop (models.Model):
     
     def __str__(self):
         return self.Nombre
-        
+
     def save(self):
         super().save()

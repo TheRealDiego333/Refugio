@@ -12,7 +12,6 @@ def catalogo(request):
 
 
 def registromascota(request):
-
     if request.method == 'POST':
         registro = Agregarmascota(request.POST, request.FILES)
         if registro.is_valid(): 
@@ -49,6 +48,8 @@ def register(request):
     else:
         form = UserRegisterForm()
     return render(request, 'users/register.html',{'form': form})
+
+
 
 @login_required  
 def profile(request):

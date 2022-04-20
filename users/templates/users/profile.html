@@ -24,12 +24,12 @@
          </button>
      </div>
    </form>
-
-  <button class="btn btn-outline-info">
-    <a href="registromascota/">    
-      Registrar mascota
-    </a>
-
-  </button>
+{% if user.is_superuser %}
+    <button class="btn btn-outline-info">
+      <a href="registromascota/">    
+        Registrar mascota
+      </a>
+    </button>
+{% endif %}
   </div>
-  {% endblock content %}
+{% endblock content %}
