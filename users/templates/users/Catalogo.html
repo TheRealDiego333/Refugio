@@ -4,21 +4,23 @@
 
 {% for RegistroMascota in lista_catalogo %}
     {% if RegistroMascota.adoptante == 'Disponible' %}
-        <div>        <img class="rounded-circle account-img" src="{{RegistroMascota.imagen.url}}" >
-        <ul>
-        <h2><li> {{RegistroMascota.nombre}}</li> </h2>
-        <li> ID: {{RegistroMascota.id}}</li>
-        <li> Tipo de comida: {{RegistroMascota.alimentacion}}</li>
-        <li> Edad: {{RegistroMascota.edad}}</li>
-        <li> Fecha de rescate: {{RegistroMascota.fecha_de_rescate|date:"d F Y P "}}</li>
-        <li> Raza: {{RegistroMascota.raza}}</li>
-        <li> Enfermedades: {{RegistroMascota.enfermedades}}</li>
+    <br><div class="col-md-7">
+        <div class="list-group-item"> <img class="rounded-circle account-img" src="{{RegistroMascota.imagen.url}}" >
+        <ul class="list-group-item">
+        <h2 class="account-heading"> {{RegistroMascota.nombre}} </h2>
+        <li class="list-group-item"> ID: {{RegistroMascota.id}}</li>
+        <li class="list-group-item"> Tipo de comida: {{RegistroMascota.alimentacion}}</li>
+        <li class="list-group-item"> Edad: {{RegistroMascota.edad}}</li>
+        <li class="list-group-item"> Fecha de rescate: {{RegistroMascota.fecha_de_rescate|date:"d F Y P "}}</li>
+        <li class="list-group-item"> Raza: {{RegistroMascota.raza}}</li>
+        <li class="list-group-item"> Enfermedades: {{RegistroMascota.enfermedades}}</li>
         </ul>
-    </div>
-
+        </div>
+        </div>
     {% else %}
-    <div>
-        <br><h3>A este lomito ya lo adoptaron!</h3>
+        
+    <div class="col-md-7">  
+        <h3 class="list-group-item">A este lomito ya lo adoptaron!</h3>
     </div>
     {% endif %}
 {% endfor %}

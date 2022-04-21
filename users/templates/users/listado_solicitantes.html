@@ -1,0 +1,37 @@
+{% extends "blog/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+
+<table class="table">
+    <thead>
+      <tr>
+
+        <th scope="col">Nombre</th>
+        <th scope="col">Edad</th>
+        <th scope="col">Correo</th>
+        <th scope="col">Telefono</th>
+        <th scope="col">Domicilio</th>
+        <th scope="col">Numero de mascotas</th>
+        <th scope="col">Razones</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for SolicitudAdop in lista_solicitantes %}  
+            <tr>
+                <td>{{SolicitudAdop.Nombre}}</td>
+                <td>{{SolicitudAdop.Edad}}</td>
+                <td>{{SolicitudAdop.Correo}}</td>
+                <td>{{SolicitudAdop.Telefono}}</td>
+                <td>{{SolicitudAdop.Domicilio}}</td>
+                <td>{{SolicitudAdop.NumeroMasc}}</td>
+                <td>{{SolicitudAdop.Razones}}</td>
+            </tr>
+        {% endfor %}
+
+    </tbody>
+  </table>
+
+
+
+{% endblock content %}

@@ -4,7 +4,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from matplotlib.style import context
 from .forms import Agregarmascota,  UserRegisterForm, UserUpdateForm, ProfileUpdateForm, SolicitudAdopcion
-from .models import RegistroMascota, Profile
+from .models import RegistroMascota, Profile, SolicitudAdop
 
 def catalogo(request):
     lista_catalogo = RegistroMascota.objects.all()
@@ -34,7 +34,9 @@ def solicitud(request):
     return render(request, 'users/formulario.html', {'registro':registro})
 
 
-
+def listado_solicitantes(request):
+    lista_solicitantes = SolicitudAdop.objects.all()
+    return render(request,'users/listado_solicitantes.html',{'lista_solicitantes':lista_solicitantes})
 
 
 def register(request):
