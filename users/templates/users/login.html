@@ -2,28 +2,27 @@
 {% load crispy_forms_tags %}
 {% block content %}
 
- <div class="content-section">
-     <form method="POST">
-         {% csrf_token %}
-        <fieldset class="form-group">
-            <legend class="border-bottom mb-4">
-                Log in
-            </legend>                
-            {{ form|crispy}}
-        </fieldset>
-        <div class="form-group">
-            <button class="btn btn-outline-info" type="summit">
-              Login  
-            </button>
-        </div>
-     </form>
-     <div class="border-top pt-3">
-         <small class="text-muted">
-             Do yo need an account?<a class="ml-2" href="{% url 'register' %}">
-             Sign Up Now  
-             </a>
-         </small>
-     </div>
- </div>
+<form class="content-section" action="{% url 'login' %}" method='POST'>  {% csrf_token %}
+    <h3 class="mb-4">Sign In</h3>
+    {% if form.errors %}
+    <div class="alert alert-primary" role="alert">
+      Error:  Nombre de Usuario incorrectos o Contraseña
+    </div>
+    {% endif %}
+    <label class="form-label">{{ form.username.label}}</label>
+    {{ form.username}}<br>
+    <label class="form-label">{{ form.password.label}}</label>
+    {{ form.password}}<br>
+    <div class="d-grid gap-2">
+      <input type="hidden" name="next" value="{{ next }}">
+      <button class="btn btn-primary py-2 mb-4 mt-5 fw-bold" type="submit" value="Log-in">Ingresar
+      </button>
+    </div>
+    <div class="flex-column justify-content-center mx-auto pb-3">
+      <div class="text-center"><a href="{% url 'register' %}">Crear una cuenta</a></div>
+      <div class="text-center"><a href="{% url 'password_reset' %}">Reiniciar contraseña</a></div>
+
+    </div>
+  </form>
 {% endblock content %}
  

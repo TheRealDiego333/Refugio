@@ -21,6 +21,8 @@ from django.urls import path, include
 from users import views as user_views
 from django.conf import settings
 from django.conf.urls.static import static
+from users.forms import PwdResetConfirmForm, PwdResetForm
+from django.views.generic import TemplateView
 
 urlpatterns = [
     path('admin/',admin.site.urls, name='admin'),
@@ -32,6 +34,29 @@ urlpatterns = [
     path('profile/', include('users.urls')),
     path('formulario/',user_views.solicitud, name='solicitud'),
     path('listado_solicitantes/',user_views.listado_solicitantes, name='listado_solicitantes'),
+    path('password-reset/',
+         auth_views.PasswordResetView.as_view(
+             template_name='users/password_reset.html'
+         ),
+         name='password_reset'),
+    path('password-reset/done/',
+         auth_views.PasswordResetDoneView.as_view(
+             template_name='users/password_reset_done.html'
+         ),
+         name='password_reset_done'),
+    path('password-reset-confirm/<uidb64>/<token>/',
+         auth_views.PasswordResetConfirmView.as_view(
+             template_name='users/password_reset_confirm.html'
+         ),
+        name='password_reset_confirm'),
+    path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(), name='password_reset_confirm'),
+
+    path('password-reset-complete/',
+         auth_views.PasswordResetCompleteView.as_view(
+             template_name='users/password_reset_complete.html'
+    
+         ),
+         name='password_reset_complete'),
 
 ]
 

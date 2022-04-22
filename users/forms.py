@@ -5,7 +5,7 @@ from lzma import FORMAT_ALONE
 from pyexpat import model
 from re import template
 from django.contrib.auth.models import User
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, PasswordResetForm, SetPasswordForm
 from matplotlib import widgets
 from .models import Profile, RegistroMascota, SolicitudAdop
 from django.forms import *
@@ -63,3 +63,22 @@ class SolicitudAdopcion(ModelForm):
         fields = "__all__"
 
 
+class PwdResetForm(PasswordResetForm):
+    email = EmailField(max_length=254, widget=TextInput(
+        attrs={'class': 'form-control mb-3', 'placeholder': 'Email', 'id': 'form-email'}))
+
+    def clean_email(self):
+        email = self.cleaned_data['email']
+        u = User.objects.filter(email=email)
+        if not u:
+            raise forms.ValidationError(
+                'Desafortunadamente no pudimos encontrar ningun usuario con este email')
+        return email
+
+class PwdResetConfirmForm(SetPasswordForm):
+    new_password1 = CharField(
+        label='Nueva Contraseña', widget=PasswordInput(
+            attrs={'class': 'form-control mb-3', 'placeholder': 'Nueva Contraseña', 'id': 'form-newpass'}))
+    new_password2 = CharField(
+        label='Repite tu Contraseña', widget=PasswordInput(
+            attrs={'class': 'form-control mb-3', 'placeholder': 'Nueva Contraseña', 'id': 'form-new-pass2'}))
