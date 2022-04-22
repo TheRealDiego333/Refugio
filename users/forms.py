@@ -1,10 +1,13 @@
+from ctypes import alignment
+from dataclasses import field
 import email
 from lzma import FORMAT_ALONE
+from pyexpat import model
 from re import template
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from matplotlib import widgets
-from .models import Profile, RegistroMascota, SolicitudAdop 
+from .models import Profile, RegistroMascota, SolicitudAdop
 from django.forms import *
 
 
@@ -29,6 +32,13 @@ class UserUpdateForm(ModelForm):
             )
         }
 
+#class CambiarComida(ModelForm):
+#    alimentacion = CharField()
+#    class Meta:
+#        model = RegistroMascota
+#       fields = ['alimentacion']
+#
+
 class ProfileUpdateForm(ModelForm):
     class Meta:
         model = Profile
@@ -51,4 +61,5 @@ class SolicitudAdopcion(ModelForm):
     class Meta:
         model = SolicitudAdop
         fields = "__all__"
+
 

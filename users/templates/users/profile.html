@@ -1,7 +1,7 @@
 {% extends "blog/base.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
-<div class="col-md-8">
+<div class="col-md-7">
 <div class="content-section">
     <div class="media">
       <img class="rounded-circle account-img" src="{{user.profile.image.url}}">
@@ -32,18 +32,25 @@
       </a>
     </button>
 {% endif %}
-<div class="content-section">
+<div class="col-md-15">
   <div class="media">
     <h2>Mascotas en proceso de adopcion</h2>
+<!--   <button class="btn btn-outline-info">
+      <a href="comida/">    
+        Actualizar comida de las mascotas
+      </a>
+    </button>
+-->   
 {% for RegistroMascota in lista_catalogo %}
 {% if RegistroMascota.adoptante == user.username %}
-
+<div class="content-section">
     <img class="rounded-circle account-img" src="{{RegistroMascota.imagen.url}}" >
     <h2> {{RegistroMascota.nombre}}</h2>
     <div class="media-body">
       <ul>
     <li> ID: {{RegistroMascota.id}}</li>
-    <li> Tipo de comida: {{RegistroMascota.alimentacion}}</li>
+    <li> Tipo de comida: {{RegistroMascota.alimentacion}}   
+    </li>
     <li> Edad: {{RegistroMascota.edad}}</li>
     <li> Fecha de rescate: {{RegistroMascota.fecha_de_rescate|date:"d F Y P "}}</li>
     <li> Raza: {{RegistroMascota.raza}}</li>

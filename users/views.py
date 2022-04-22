@@ -3,12 +3,13 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from matplotlib.style import context
-from .forms import Agregarmascota,  UserRegisterForm, UserUpdateForm, ProfileUpdateForm, SolicitudAdopcion
+from .forms import Agregarmascota, UserRegisterForm, UserUpdateForm, ProfileUpdateForm, SolicitudAdopcion
 from .models import RegistroMascota, Profile, SolicitudAdop
 
 def catalogo(request):
     lista_catalogo = RegistroMascota.objects.all()
     return render(request,'users/Catalogo.html', {'lista_catalogo': lista_catalogo })
+
 
 
 def registromascota(request):
@@ -20,6 +21,7 @@ def registromascota(request):
     else:
         registro = Agregarmascota()
     return render(request, 'users/registromascota.html', {'registro':registro})
+
 
 
 def solicitud(request):
@@ -52,6 +54,23 @@ def register(request):
     return render(request, 'users/register.html',{'form': form})
 
 
+#def actualizarcomida(request):
+#    actucomida = CambiarComida(request.POST)
+#    lista_catalogo = RegistroMascota.objects.all()
+#    lista_nombres = Profile.objects.all()
+#    if request.method == 'POST':
+#        actucomida = CambiarComida(request.POST)
+#        if actucomida.is_valid():
+#            actucomida.save
+#            messages.success(request, f'La alimentacion a sido actualizada')
+#            return redirect ('profile')
+#    context = {
+#        'actucomida':actucomida,
+#        'lista_catalogo': lista_catalogo, 
+#        'lista_nombres': lista_nombres
+#    }
+#
+#    return render(request, 'users/actualizar_comida.html',context)
 
 @login_required  
 def profile(request):
@@ -63,7 +82,7 @@ def profile(request):
         if u_form.is_valid() and p_form.is_valid():
             u_form.save()
             p_form.save()
-            messages.success(request, f'Your account has been updated')
+            messages.success(request, f'Su cuenta ha sido actualizada')
             return redirect('profile')
     else:
         u_form = UserUpdateForm(instance=request.user)

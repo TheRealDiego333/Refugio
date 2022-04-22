@@ -49,7 +49,6 @@ class RegistroMascota (models.Model):
             img.thumbnail(output_size)
             img.save(self.imagen.path)
 
-
 class SolicitudAdop (models.Model):
     Nombre     = models.CharField(max_length=50)
     Edad       = models.CharField(max_length=50)
@@ -58,9 +57,17 @@ class SolicitudAdop (models.Model):
     Domicilio  = models.CharField(max_length=100)
     NumeroMasc = models.IntegerField()
     Razones    = models.CharField(max_length=150)
-    
+    Aprobado   = models.CharField(max_length=15, default='En proceso')
+
+
     def __str__(self):
         return self.Nombre
 
     def save(self):
         super().save()
+
+#class comida (models.Model):
+#    alimentacion = models.OneToOneField(RegistroMascota, on_delete=models.CASCADE)
+    
+#    def save(self, *args, **kwargs):
+#       super(RegistroMascota, self).save(*args, **kwargs)

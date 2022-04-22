@@ -1,0 +1,18 @@
+{% extends "blog/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<div class="col-md-15">
+    <div class="media">
+      <h2>Mascotas en proceso de adopcion</h2>
+  {% for RegistroMascota in lista_catalogo %}
+  {% if RegistroMascota.adoptante == user.username %}
+  <form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ comida.as_p }}
+    {% endif %}
+  {% endfor %}
+  <button type="submit">Upload</button>
+</form>
+
+{% endblock content %}
