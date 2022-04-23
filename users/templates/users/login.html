@@ -1,7 +1,7 @@
 {% extends "blog/base.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
-
+{% if request.session.form_message == "Rostro desconocido" %}
 <form class="content-section" action="{% url 'login' %}" method='POST'>  {% csrf_token %}
     <h3 class="mb-4">Sign In</h3>
     {% if form.errors %}
@@ -9,13 +9,10 @@
       Error:  Nombre de Usuario incorrectos o Contraseña
     </div>
     {% endif %}
-    <label class="form-label">{{ form.username.label}}</label>
-    {{ form.username}}<br>
-    <label class="form-label">{{ form.password.label}}</label>
-    {{ form.password}}<br>
+    Cree una cuenta
     <div class="d-grid gap-2">
       <input type="hidden" name="next" value="{{ next }}">
-      <button class="btn btn-primary py-2 mb-4 mt-5 fw-bold" type="submit" value="Log-in">Ingresar
+      <button class="btn btn-primary py-2 mb-4 mt-5 fw-bold" type="submit" value="Log-in", disabled>Ingresar
       </button>
     </div>
     <div class="flex-column justify-content-center mx-auto pb-3">
@@ -24,5 +21,31 @@
 
     </div>
   </form>
+{% endif %}
+{% if request.session.form_message == "Rostro identificado" %}
+<form class="content-section" action="{% url 'login' %}" method='POST'>  {% csrf_token %}
+  <h3 class="mb-4">Sign In</h3>
+  {% if form.errors %}
+  <div class="alert alert-primary" role="alert">
+    Error:  Nombre de Usuario incorrectos o Contraseña
+  </div>
+  {% endif %}
+  <label class="form-label">{{ form.username.label}}</label>
+  {{ form.username}}<br>
+  <label class="form-label">{{ form.password.label}}</label>
+  {{ form.password}}<br>
+  <div class="d-grid gap-2">
+    <input type="hidden" name="next" value="{{ next }}">
+    <button class="btn btn-primary py-2 mb-4 mt-5 fw-bold" type="submit" value="Log-in">Ingresar
+    </button>
+  </div>
+  <div class="flex-column justify-content-center mx-auto pb-3">
+    <div class="text-center"><a href="{% url 'register' %}">Crear una cuenta</a></div>
+    <div class="text-center"><a href="{% url 'password_reset' %}">Reiniciar contraseña</a></div>
+
+  </div>
+</form>
+{% endif %}
+
 {% endblock content %}
  
