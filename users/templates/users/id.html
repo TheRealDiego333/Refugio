@@ -1,0 +1,12 @@
+{% extends "blog/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<form action="prueba/" method="POST">
+    {% csrf_token %}
+    <div class="form-group">
+        <label for="inputId">Ingrese su ID único de usuario, su ID es: {{user.id}} </label>
+        <input type="text" class="form-control" name="userId" id="inputId" placeholder="Enter Id">
+    </div>
+    <button type="submit" class="btn btn-warning">Enviar</button>
+    </form>
+{% endblock content %}

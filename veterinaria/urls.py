@@ -23,6 +23,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from users.forms import PwdResetConfirmForm, PwdResetForm
 from django.views.generic import TemplateView
+from faceRecog.views import*
 
 urlpatterns = [
     path('admin/',admin.site.urls, name='admin'),
@@ -54,6 +55,10 @@ urlpatterns = [
              template_name='users/password_reset_complete.html'
          ),
          name='password_reset_complete'),
+    path('id/prueba/',create_dataset,),   
+    path('id/',user_views.id_show, name='id_show'),
+    path('trainer/',trainer, ),
+    path('detect/', detect),
 ]
 
 

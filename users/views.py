@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from matplotlib.style import context
+from platformdirs import user_runtime_path
 from .forms import Agregarmascota, UserRegisterForm, UserUpdateForm, ProfileUpdateForm, SolicitudAdopcion
 from .models import RegistroMascota, Profile, SolicitudAdop
 
@@ -10,7 +11,8 @@ def catalogo(request):
     lista_catalogo = RegistroMascota.objects.all()
     return render(request,'users/Catalogo.html', {'lista_catalogo': lista_catalogo })
 
-
+def id_show (request):
+    return render(request,'users/id.html')
 
 def registromascota(request):
     if request.method == 'POST':
@@ -27,9 +29,9 @@ def registromascota(request):
 def solicitud(request):
 
     if request.method == 'POST':
-        lista_solicitudes = SolicitudAdopcion(request.POST, request)
-        if lista_solicitudes.is_valid():
-            lista_solicitudes.save()
+        registro = SolicitudAdopcion(request.POST, request)
+        if registro.is_valid():
+            registro.save()
             return redirect('catalogo')
     else:
         registro = Agregarmascota()
